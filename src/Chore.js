@@ -2,6 +2,8 @@ const moment = require('moment')
 
 const templates = require('./templates')
 
+let editForm
+
 module.exports = class Chore {
   constructor (entry) {
     this.id = entry.id
@@ -27,6 +29,11 @@ module.exports = class Chore {
       action.innerHTML = 'Done'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.done()
+
+      action = document.createElement('button')
+      action.innerHTML = 'Edit'
+      this.actionsDiv.appendChild(action)
+      action.onclick = () => this.edit()
     }
 
     templates.render(this.contentDiv, 'list', {entry: this.data})
@@ -61,5 +68,44 @@ module.exports = class Chore {
         this.data = data
         callback()
       })
+  }
+
+  edit () {
+    if (editForm && editForm.parentNode === document.body) {
+      document.body.removeChild(editForm)
+    }
+
+    const form = document.createElement('form')
+    editForm = form
+    document.body.appendChild(form)
+    const div = document.createElement('div')
+    form.appendChild(div)
+    templates.render(div, 'edit', {entry: this.data})
+
+    const submit = document.createElement('input')
+    submit.type = 'submit'
+    submit.value = 'Save'
+    form.appendChild(submit)
+
+    const cancel = document.createElement('button')
+    cancel.innerHTML = 'Cancel'
+    form.appendChild(cancel)
+    cancel.onclick = () => document.body.removeChild(form)
+
+    form.onsubmit = () => {
+      let update = {}
+      Array.from(form.elements).forEach(el => {
+        if (el.name) {
+          update[el.name] = el.value
+        }
+      })
+
+      this.save(update, () => {
+        this.show()
+        document.body.removeChild(form)
+      })
+
+      return false
+    }
   }
 }

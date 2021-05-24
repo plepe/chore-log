@@ -16,7 +16,12 @@ fetch('/chores')
     })
   })
 
-function showChore (entry, li) {
+window.onload = () => {
+  const button = document.createElement('button')
+  button.innerHTML = 'Add'
+  document.body.appendChild(button)
+  button.onclick = () => {
+    const chore = new Chore({})
+    chore.edit()
+  }
 }
-
-
