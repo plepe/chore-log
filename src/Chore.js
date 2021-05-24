@@ -31,17 +31,20 @@ class Chore {
       this.li.appendChild(this.actionsDiv)
 
       let action = document.createElement('button')
-      action.innerHTML = 'Done'
+      action.innerHTML = '<i class="fas fa-check"></i>'
+      action.title = 'Done'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.done()
 
       action = document.createElement('button')
-      action.innerHTML = 'Edit'
+      action.innerHTML = '<i class="fas fa-cog"></i>'
+      action.title = 'Edit'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.edit()
 
       action = document.createElement('button')
-      action.innerHTML = 'Remove'
+      action.innerHTML = '<i class="fas fa-trash"></i>'
+      action.title = 'Remove'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.remove()
     }
@@ -136,13 +139,15 @@ class Chore {
     form.appendChild(div)
     templates.render(div, 'edit', {entry: this.data})
 
-    const submit = document.createElement('input')
+    const submit = document.createElement('button')
     submit.type = 'submit'
-    submit.value = 'Save'
+    submit.title = 'Save'
+    submit.innerHTML = '<i class="fas fa-save"></i>'
     form.appendChild(submit)
 
     const cancel = document.createElement('button')
-    cancel.innerHTML = 'Cancel'
+    cancel.title = 'Cancel'
+    cancel.innerHTML = '<i class="fas fa-times"></i>'
     form.appendChild(cancel)
     cancel.onclick = () => document.body.removeChild(form)
 

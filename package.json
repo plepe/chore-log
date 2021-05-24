@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "mkdir -p public/dist && browserify src/index.js -o public/dist/app.js",
-    "watch": "watchify --debug src/index.js -o public/dist/app.js -v",
+    "build": "mkdir -p dist && browserify src/index.js -o dist/app.js",
+    "watch": "watchify --debug src/index.js -o dist/app.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "twig": "^1.15.4"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "browserify": "^17.0.0",
     "watchify": "^4.0.0"
   }

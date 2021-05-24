@@ -18,7 +18,8 @@ fetch('/chores')
 
 window.onload = () => {
   const button = document.createElement('button')
-  button.innerHTML = 'Add'
+  button.innerHTML = '<i class="fas fa-plus"></i>'
+  button.title = 'Add'
   document.body.appendChild(button)
   button.onclick = () => {
     const chore = new Chore({})
