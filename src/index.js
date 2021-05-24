@@ -25,4 +25,6 @@ window.onload = () => {
     const chore = new Chore({})
     chore.edit()
   }
+
+  window.setInterval(Chore.update, 60000)
 }

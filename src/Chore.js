@@ -185,4 +185,14 @@ Chore.reorder = () => {
   })
 }
 
+Chore.update = () => {
+  const ul = document.getElementById('chores')
+
+  const list = Array.from(ul.children)
+
+  list.forEach(li => {
+    li._chore.show()
+  })
+}
+
 module.exports = Chore
