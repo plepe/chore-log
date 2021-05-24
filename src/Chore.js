@@ -90,7 +90,7 @@ class Chore {
   }
 
   save (update, callback) {
-    global.fetch(this.id ? '/chores/' + this.id : '/chores', {
+    global.fetch(this.id ? 'chores/' + this.id : 'chores', {
       method: this.id ? 'PATCH' : 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ class Chore {
       return callback()
     }
 
-    global.fetch('/chores/' + this.id, {
+    global.fetch('chores/' + this.id, {
       method: 'DELETE'
     })
       .then(req => req.text())

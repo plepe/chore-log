@@ -7,7 +7,7 @@ const Chore = require('./Chore')
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
 Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
 
-global.fetch('/chores')
+global.fetch('chores')
   .then(req => req.json())
   .then(data => {
     data.forEach(entry => {
