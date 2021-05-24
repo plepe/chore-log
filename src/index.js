@@ -4,13 +4,49 @@ const templates = require('./templates')
 fetch('/chores')
   .then(req => req.json())
   .then(data => {
-    data.forEach(showChore)
+    data.forEach(entry => showChore(entry))
   })
 
-function showChore (entry) {
+function showChore (entry, li) {
   const ul = document.getElementById('chores')
-  const li = document.createElement('li')
-  ul.appendChild(li)
+  if (!li) {
+    li = document.createElement('li')
+    ul.appendChild(li)
+  }
 
-  templates.render(li, 'list', {entry})
+  templates.render(li, 'list', {entry}, () => {
+    let actions = li.getElementsByClassName('actions')
+    if (!actions.length) {
+      return
+    }
+    actions = actions[0]
+
+    let action = document.createElement('button')
+    action.innerHTML = 'Done'
+    actions.appendChild(action)
+    action.onclick = () => {
+      if (!entry.dates) {
+        entry.dates = []
+      }
+
+      entry.dates.push('2021-05-24')
+
+      const update = {
+        dates: entry.dates
+      }
+
+      fetch('/chores/' + entry.id, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(update)
+      })
+        .then(req => req.json())
+        .then(data => {
+          entry = data
+          showChore(entry, li)
+        })
+    }
+  })
 }
