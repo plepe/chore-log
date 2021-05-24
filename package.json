@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/plepe/chore-log#readme",
   "dependencies": {
-    "json-server": "^0.16.3"
+    "json-server": "^0.16.3",
+    "twig": "^1.15.4"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
