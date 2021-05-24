@@ -1,4 +1,6 @@
 const Twig = require('twig')
+const moment = require('moment')
+
 const templates = require('./templates')
 
 fetch('/chores')
@@ -29,7 +31,7 @@ function showChore (entry, li) {
         entry.dates = []
       }
 
-      entry.dates.push('2021-05-24')
+      entry.dates.push(moment().toISOstring(true))
 
       const update = {
         dates: entry.dates

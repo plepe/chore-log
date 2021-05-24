@@ -21,6 +21,7 @@
   "homepage": "https://github.com/plepe/chore-log#readme",
   "dependencies": {
     "json-server": "^0.16.3",
+    "moment": "^2.29.1",
     "twig": "^1.15.4"
   },
   "devDependencies": {
