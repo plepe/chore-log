@@ -8,8 +8,8 @@ ul#chores {
 }
 ul#chores > li {
   list-style: none;
-  border: 1px solid #ff0000;
-  background: #ffafaf;
+  border: 1px solid rgb(var(--color));
+  background: rgba(var(--color), 0.1);
   border-radius: 5px;
   margin-bottom: 0.5em;
   width: 100%;

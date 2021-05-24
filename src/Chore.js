@@ -49,6 +49,12 @@ class Chore {
       action.onclick = () => this.remove()
     }
 
+    if (this.data.color) {
+      this.li.style = '--color: ' + parseInt(this.data.color.substr(1, 2), 16) + ',' + parseInt(this.data.color.substr(3, 2), 16) + ',' + parseInt(this.data.color.substr(5, 2), 16)
+    } else {
+      this.li.style = '--color: 0,0,0'
+    }
+
     templates.render(this.contentDiv, 'list', {entry: this.data}, () => this.reorder())
 
     return this.li
