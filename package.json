@@ -1,0 +1,29 @@
+{
+  "name": "chore-log",
+  "version": "0.0.0",
+  "description": "Logs the date of household chores, so that you can reconstruct when you've done something last.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "mkdir -p public/dist && browserify src/index.js -o public/dist/app.js",
+    "watch": "watchify --debug src/index.js -o public/dist/app.js -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plepe/chore-log.git"
+  },
+  "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plepe/chore-log/issues"
+  },
+  "homepage": "https://github.com/plepe/chore-log#readme",
+  "dependencies": {
+    "json-server": "^0.16.3"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "watchify": "^4.0.0"
+  }
+}
