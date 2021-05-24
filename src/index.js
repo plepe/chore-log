@@ -30,29 +30,31 @@ function showChore (entry, li) {
     let action = document.createElement('button')
     action.innerHTML = 'Done'
     actions.appendChild(action)
-    action.onclick = () => {
-      if (!entry.dates) {
-        entry.dates = []
-      }
-
-      entry.dates.push(moment().toISOstring(true))
-
-      const update = {
-        dates: entry.dates
-      }
-
-      fetch('/chores/' + entry.id, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(update)
-      })
-        .then(req => req.json())
-        .then(data => {
-          entry = data
-          showChore(entry, li)
-        })
-    }
+    action.onclick = () => doneChore(entry, li)
   })
+}
+
+function doneChore(entry, li) {
+  if (!entry.dates) {
+    entry.dates = []
+  }
+
+  entry.dates.push(moment().toISOString(true))
+
+  const update = {
+    dates: entry.dates
+  }
+
+  fetch('/chores/' + entry.id, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(update)
+  })
+    .then(req => req.json())
+    .then(data => {
+      entry = data
+      showChore(entry, li)
+    })
 }
