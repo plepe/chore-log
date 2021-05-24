@@ -4,15 +4,20 @@ const templates = require('./templates')
 
 let editForm
 
-module.exports = class Chore {
+class Chore {
   constructor (entry) {
     this.id = entry.id
     this.data = entry
   }
 
+  lastDate () {
+    return this.data.dates ? this.data.dates[this.data.dates.length - 1] : null
+  }
+
   show () {
     if (!this.li) {
       this.li = document.createElement('li')
+      this.li._chore = this
 
       const ul = document.getElementById('chores')
       ul.appendChild(this.li)
@@ -41,9 +46,24 @@ module.exports = class Chore {
       action.onclick = () => this.remove()
     }
 
-    templates.render(this.contentDiv, 'list', {entry: this.data})
+    templates.render(this.contentDiv, 'list', {entry: this.data}, () => this.reorder())
 
     return this.li
+  }
+
+  reorder () {
+    const ul = document.getElementById('chores')
+    const date = this.lastDate()
+
+    const other = Array.from(ul.children)
+    for (let i = 0; i < other.length; i++) {
+      const otherDate = other[i]._chore.lastDate()
+
+      if (otherDate < date) {
+        ul.insertBefore(this.li, other[i])
+        return
+      }
+    }
   }
 
   done () {
@@ -143,3 +163,15 @@ module.exports = class Chore {
     }
   }
 }
+
+Chore.reorder = () => {
+  const ul = document.getElementById('chores')
+
+  const list = Array.from(ul.children)
+
+  list.forEach(li => {
+    li._chore.reorder()
+  })
+}
+
+module.exports = Chore
