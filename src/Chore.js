@@ -34,6 +34,11 @@ module.exports = class Chore {
       action.innerHTML = 'Edit'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.edit()
+
+      action = document.createElement('button')
+      action.innerHTML = 'Remove'
+      this.actionsDiv.appendChild(action)
+      action.onclick = () => this.remove()
     }
 
     templates.render(this.contentDiv, 'list', {entry: this.data})
@@ -52,7 +57,7 @@ module.exports = class Chore {
       dates: this.data.dates
     }
 
-    this.save(update, () => this.show())
+    this.save(update, () => {})
   }
 
   save (update, callback) {
@@ -65,7 +70,36 @@ module.exports = class Chore {
     })
       .then(req => req.json())
       .then(data => {
+        if (!this.id) {
+          this.id = data.id
+        }
+
         this.data = data
+
+        if (this.li) {
+          this.show()
+        }
+
+        callback()
+      })
+  }
+
+  remove (callback) {
+    if (!this.id) {
+      return callback()
+    }
+
+    fetch('/chores/' + this.id, {
+      method: 'DELETE'
+    })
+      .then(req => req.text())
+      .then(data => {
+        this.id = null
+
+        if (this.li) {
+          this.li.parentNode.removeChild(this.li)
+        }
+
         callback()
       })
   }
