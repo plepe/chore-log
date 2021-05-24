@@ -12,6 +12,9 @@ module.exports = class Chore {
     if (!this.li) {
       this.li = document.createElement('li')
 
+      const ul = document.getElementById('chores')
+      ul.appendChild(this.li)
+
       this.contentDiv = document.createElement('div')
       this.contentDiv.className = 'content'
       this.li.appendChild(this.contentDiv)

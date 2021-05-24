@@ -12,9 +12,7 @@ fetch('/chores')
   .then(data => {
     data.forEach(entry => {
       const chore = new Chore(entry)
-      const ul = document.getElementById('chores')
-      const li = chore.show(ul)
-      ul.appendChild(li)
+      chore.show()
     })
   })
 
