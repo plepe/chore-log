@@ -45,8 +45,12 @@ module.exports = class Chore {
       dates: this.data.dates
     }
 
-    fetch('/chores/' + this.id, {
-      method: 'PATCH',
+    this.save(update, () => this.show())
+  }
+
+  save (update, callback) {
+    fetch(this.id ? '/chores/' + this.id : '/chores', {
+      method: this.id ? 'PATCH' : 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -55,7 +59,7 @@ module.exports = class Chore {
       .then(req => req.json())
       .then(data => {
         this.data = data
-        this.show()
+        callback()
       })
   }
 }
