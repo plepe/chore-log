@@ -11,20 +11,22 @@ module.exports = class Chore {
   show () {
     if (!this.li) {
       this.li = document.createElement('li')
-    }
 
-    templates.render(this.li, 'list', {entry: this.data}, () => {
-      let actions = this.li.getElementsByClassName('actions')
-      if (!actions.length) {
-        return
-      }
-      actions = actions[0]
+      this.contentDiv = document.createElement('div')
+      this.contentDiv.className = 'content'
+      this.li.appendChild(this.contentDiv)
+
+      this.actionsDiv = document.createElement('div')
+      this.actionsDiv.className = 'actions'
+      this.li.appendChild(this.actionsDiv)
 
       let action = document.createElement('button')
       action.innerHTML = 'Done'
-      actions.appendChild(action)
+      this.actionsDiv.appendChild(action)
       action.onclick = () => this.done()
-    })
+    }
+
+    templates.render(this.contentDiv, 'list', {entry: this.data})
 
     return this.li
   }
