@@ -1,7 +1,11 @@
 const Twig = require('twig')
 const moment = require('moment')
+require('moment/locale/de-at');
 
 const templates = require('./templates')
+
+Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
+Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
 
 fetch('/chores')
   .then(req => req.json())

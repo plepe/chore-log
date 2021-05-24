@@ -1,5 +1,5 @@
 <div class='title'>{{ entry.title }}</div>
 {% if entry.dates %}
-<div class='last-date'>{{ entry.dates|last }}</div>
+<div class='last-date' title='{{ entry.dates|last|momentFormat("ll") }}'>{{ entry.dates|last|momentFromNow }}</div>
 {% endif %}
 <div class='actions'></div>
