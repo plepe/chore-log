@@ -55,7 +55,7 @@ class Chore {
       this.li.style = '--color: 0,0,0'
     }
 
-    templates.render(this.contentDiv, 'list', {entry: this.data}, () => this.reorder())
+    templates.render(this.contentDiv, 'list', { entry: this.data }, () => this.reorder())
 
     return this.li
   }
@@ -90,7 +90,7 @@ class Chore {
   }
 
   save (update, callback) {
-    fetch(this.id ? '/chores/' + this.id : '/chores', {
+    global.fetch(this.id ? '/chores/' + this.id : '/chores', {
       method: this.id ? 'PATCH' : 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ class Chore {
       return callback()
     }
 
-    fetch('/chores/' + this.id, {
+    global.fetch('/chores/' + this.id, {
       method: 'DELETE'
     })
       .then(req => req.text())
@@ -143,7 +143,7 @@ class Chore {
     document.body.appendChild(form)
     const div = document.createElement('div')
     form.appendChild(div)
-    templates.render(div, 'edit', {entry: this.data})
+    templates.render(div, 'edit', { entry: this.data })
 
     const submit = document.createElement('button')
     submit.type = 'submit'
@@ -158,7 +158,7 @@ class Chore {
     cancel.onclick = () => document.body.removeChild(form)
 
     form.onsubmit = () => {
-      let update = {}
+      const update = {}
       Array.from(form.elements).forEach(el => {
         if (el.name) {
           update[el.name] = el.value

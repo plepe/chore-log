@@ -4,6 +4,7 @@
   "description": "Logs the date of household chores, so that you can reconstruct when you've done something last.",
   "main": "index.js",
   "scripts": {
+    "lint": "standard --fix src/*.js server.js",
     "start": "node server.js",
     "build": "mkdir -p dist && browserify src/index.js -o dist/app.js",
     "prepare": "npm run build",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "browserify": "^17.0.0",
+    "standard": "^16.0.3",
     "watchify": "^4.0.0"
   }
 }
