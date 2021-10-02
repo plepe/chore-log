@@ -71,3 +71,15 @@ body > button {
     width: calc(100% / 6 - 0.5em);
   }
 }
+form {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  border: 1px solid black;
+  background: white;
+  overflow: auto;
+  border-radius: 1em;
+  padding: 1em;
+}
