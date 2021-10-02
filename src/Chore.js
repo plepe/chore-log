@@ -108,12 +108,12 @@ class Chore {
     const submit = document.createElement('button')
     submit.type = 'submit'
     submit.title = 'Save'
-    submit.innerHTML = '<i class="fas fa-save"></i>'
+    submit.innerHTML = '<i class="fas fa-save"></i> Ok'
     editForm.appendChild(submit)
 
     const cancel = document.createElement('button')
     cancel.title = 'Cancel'
-    cancel.innerHTML = '<i class="fas fa-times"></i>'
+    cancel.innerHTML = '<i class="fas fa-times"></i> Abbrechen'
     editForm.appendChild(cancel)
     cancel.onclick = () => document.body.removeChild(editForm)
 
@@ -225,12 +225,12 @@ class Chore {
     const submit = document.createElement('button')
     submit.type = 'submit'
     submit.title = 'Save'
-    submit.innerHTML = '<i class="fas fa-save"></i>'
+    submit.innerHTML = '<i class="fas fa-save"></i> Ok'
     editForm.appendChild(submit)
 
     const cancel = document.createElement('button')
     cancel.title = 'Cancel'
-    cancel.innerHTML = '<i class="fas fa-times"></i>'
+    cancel.innerHTML = '<i class="fas fa-times"></i> Abbrechen'
     editForm.appendChild(cancel)
     cancel.onclick = () => document.body.removeChild(editForm)
 
