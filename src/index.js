@@ -4,6 +4,15 @@ require('moment/locale/de-at')
 
 const Chore = require('./Chore')
 
+Twig.extendFilter('date_diff', (value, other) => {
+  if (!other) {
+    other = new Date()
+  }
+
+  let x = new Date(value).getTime() - new Date(other).getTime()
+  return x
+})
+
 global.lang_str = {}
 
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))

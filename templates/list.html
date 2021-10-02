@@ -8,7 +8,7 @@
 <span class='last-date' title='{{ d|momentFormat("llll") }}'>
 {{ d|slice(0, 10) == today ? 'heute'
 : d|slice(0, 10) == yesterday ? 'gestern'
-: d|momentFromNow -}}
+: 'vor ' ~ (d|date_diff / -86400000)|round ~ ' Tagen' -}}
 </span>
 {%- endfor -%}
 </div>
