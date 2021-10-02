@@ -1,12 +1,15 @@
 <div class='title'>{{ entry.title }}</div>
 {% if entry.dates %}
+<div class='last-dates'>
 {% set today = 'now'|date('Y-m-d') %}
 {% set yesterday = 'now'|date_modify('-1 day')|date('Y-m-d') %}
-{% set d = entry.dates|last %}
-<div class='last-date' title='{{ d|momentFormat("llll") }}'>
+{% for i, d in entry.dates|slice(-3)|reverse -%}
+{%- if i != 0 %}, {% endif %}
+<span class='last-date' title='{{ d|momentFormat("llll") }}'>
 {{ d|slice(0, 10) == today ? 'heute'
 : d|slice(0, 10) == yesterday ? 'gestern'
-: d|momentFromNow }}
-</div>
+: d|momentFromNow -}}
+</span>
+{%- endfor -%}
 </div>
 {% endif %}

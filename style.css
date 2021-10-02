@@ -22,7 +22,7 @@ ul#chores > li {
 .content > .title {
   font-weight: bold;
 }
-.content > .last-date {
+.content > .last-dates {
   font-style: italic;
 }
 .actions {
