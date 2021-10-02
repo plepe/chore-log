@@ -4,6 +4,8 @@ require('moment/locale/de-at')
 
 const Chore = require('./Chore')
 
+global.lang_str = {}
+
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
 Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
 

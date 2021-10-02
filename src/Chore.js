@@ -146,6 +146,17 @@ class Chore {
       }
     }
 
+    if (this.id) {
+      def.dates = {
+        type: 'text',
+        name: 'Zeiten',
+        count: {
+          default: 1,
+          index_type: 'array'
+        }
+      }
+    }
+
     return def
   }
 
