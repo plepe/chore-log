@@ -1,4 +1,5 @@
 const moment = require('moment')
+const ModulekitForm = require('modulekit-form')
 
 const templates = require('./templates')
 
@@ -133,41 +134,52 @@ class Chore {
       })
   }
 
+  editDef () {
+    const def = {
+      title: {
+        type: 'text',
+        name: 'Name'
+      },
+      color: {
+        type: 'color',
+        name: 'Farbe'
+      }
+    }
+
+    return def
+  }
+
   edit () {
     if (editForm && editForm.parentNode === document.body) {
       document.body.removeChild(editForm)
     }
 
-    const form = document.createElement('form')
-    editForm = form
-    document.body.appendChild(form)
-    const div = document.createElement('div')
-    form.appendChild(div)
-    templates.render(div, 'edit', { entry: this.data })
+    editForm = document.createElement('form')
+    document.body.appendChild(editForm)
+
+    const mf = new ModulekitForm(null, this.editDef())
+
+    mf.set_data(this.data)
+    mf.show(editForm)
 
     const submit = document.createElement('button')
     submit.type = 'submit'
     submit.title = 'Save'
     submit.innerHTML = '<i class="fas fa-save"></i>'
-    form.appendChild(submit)
+    editForm.appendChild(submit)
 
     const cancel = document.createElement('button')
     cancel.title = 'Cancel'
     cancel.innerHTML = '<i class="fas fa-times"></i>'
-    form.appendChild(cancel)
-    cancel.onclick = () => document.body.removeChild(form)
+    editForm.appendChild(cancel)
+    cancel.onclick = () => document.body.removeChild(editForm)
 
-    form.onsubmit = () => {
-      const update = {}
-      Array.from(form.elements).forEach(el => {
-        if (el.name) {
-          update[el.name] = el.value
-        }
-      })
+    editForm.onsubmit = () => {
+      const update = mf.get_data()
 
       this.save(update, () => {
         this.show()
-        document.body.removeChild(form)
+        document.body.removeChild(editForm)
       })
 
       return false

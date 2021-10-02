@@ -23,6 +23,7 @@
   "homepage": "https://github.com/plepe/chore-log#readme",
   "dependencies": {
     "json-server": "^0.16.3",
+    "modulekit-form": "git+https://github.com/plepe/modulekit-form.git#browserify",
     "moment": "^2.29.1",
     "twig": "^1.15.4"
   },
