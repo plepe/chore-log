@@ -81,13 +81,62 @@ class Chore {
       this.data.dates = []
     }
 
-    this.data.dates.push(moment().toISOString(true))
-
-    const update = {
-      dates: this.data.dates
+    if (editForm && editForm.parentNode === document.body) {
+      document.body.removeChild(editForm)
     }
 
-    this.save(update, () => {})
+    editForm = document.createElement('form')
+    document.body.appendChild(editForm)
+
+    const mf = new ModulekitForm('data', {
+      hoursAgo: {
+        name: 'Wann',
+        type: 'radio',
+        default: 0,
+        values: {
+          0: 'jetzt',
+          1: 'vor 1 Stunde',
+          2: 'vor 2 Stunden',
+          6: 'vor 6 Stunden',
+          12: 'vor 12 Stunden'
+        }
+      }
+    })
+
+    mf.show(editForm)
+
+    const submit = document.createElement('button')
+    submit.type = 'submit'
+    submit.title = 'Save'
+    submit.innerHTML = '<i class="fas fa-save"></i>'
+    editForm.appendChild(submit)
+
+    const cancel = document.createElement('button')
+    cancel.title = 'Cancel'
+    cancel.innerHTML = '<i class="fas fa-times"></i>'
+    editForm.appendChild(cancel)
+    cancel.onclick = () => document.body.removeChild(editForm)
+
+    editForm.onsubmit = () => {
+      let data = mf.get_data()
+
+      let date = new Date().getTime()
+      date-=data.hoursAgo * 3600000
+
+      this.data.dates.push(moment(new Date(date)).toISOString(true))
+      this.data.dates.sort()
+
+      const update = {
+        dates: this.data.dates
+      }
+
+      this.save(update, () => {
+        this.show()
+        document.body.removeChild(editForm)
+      })
+
+      return false
+    }
   }
 
   save (update, callback) {
