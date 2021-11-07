@@ -90,16 +90,9 @@ class Chore {
 
     const mf = new ModulekitForm('data', {
       hoursAgo: {
-        name: 'Wann',
-        type: 'radio',
+        name: 'Vor wieviel Stunden?',
+        type: 'integer',
         default: 0,
-        values: {
-          0: 'jetzt',
-          1: 'vor 1 Stunde',
-          2: 'vor 2 Stunden',
-          6: 'vor 6 Stunden',
-          12: 'vor 12 Stunden'
-        }
       }
     })
 
