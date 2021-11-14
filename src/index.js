@@ -2,7 +2,7 @@ const Twig = require('twig')
 const moment = require('moment')
 require('moment/locale/de-at')
 
-const Chore = require('./Chore')
+const Chores = require('./Chores')
 
 Twig.extendFilter('date_diff', (value, other) => {
   if (!other) {
@@ -18,13 +18,13 @@ global.lang_str = {}
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
 Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
 
+let chores
+
 global.fetch('chores')
   .then(req => req.json())
   .then(data => {
-    data.forEach(entry => {
-      const chore = new Chore(entry)
-      chore.show()
-    })
+    chores = new Chores()
+    chores.load(data)
   })
 
 window.onload = () => {
@@ -32,10 +32,7 @@ window.onload = () => {
   button.innerHTML = '<i class="fas fa-plus"></i>'
   button.title = 'Add'
   document.body.appendChild(button)
-  button.onclick = () => {
-    const chore = new Chore({})
-    chore.edit()
-  }
+  button.onclick = () => chores.addNew()
 
-  window.setInterval(Chore.update, 60000)
+  window.setInterval(() => chores.update(), 60000)
 }

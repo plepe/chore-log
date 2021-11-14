@@ -6,8 +6,9 @@ const templates = require('./templates')
 let editForm
 
 class Chore {
-  constructor (entry) {
+  constructor (entry, list) {
     this.id = entry.id
+    this.list = list
     this.data = entry
   }
 
@@ -238,6 +239,10 @@ class Chore {
       return false
     }
   }
+
+  update () {
+    this.show()
+  }
 }
 
 Chore.reorder = () => {
@@ -247,16 +252,6 @@ Chore.reorder = () => {
 
   list.forEach(li => {
     li._chore.reorder()
-  })
-}
-
-Chore.update = () => {
-  const ul = document.getElementById('chores')
-
-  const list = Array.from(ul.children)
-
-  list.forEach(li => {
-    li._chore.show()
   })
 }
 
