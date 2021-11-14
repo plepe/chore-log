@@ -22,4 +22,18 @@ module.exports = class Chores {
   update () {
     this.chores.forEach(item => item.update())
   }
+
+  allTags () {
+    const result = {}
+    this.chores.forEach(item => {
+      if (item.data.tags) {
+        item.data.tags.forEach(tag => result[tag] = tag in result ? result[tag] + 1 : 1)
+      }
+    })
+
+    const tags = Object.keys(result)
+    tags.sort((a, b) => result[b] - result[a])
+
+    return tags
+  }
 }

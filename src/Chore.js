@@ -186,6 +186,17 @@ class Chore {
       color: {
         type: 'color',
         name: 'Farbe'
+      },
+      tags: {
+        type: 'select_other',
+        name: 'Kategorien',
+        'button:other': '* Neu *',
+        count: {
+          default: 1,
+          index_type: 'array',
+          'button:add_element': 'Hinzufügen'
+        },
+        values: this.list.allTags()
       }
     }
 
