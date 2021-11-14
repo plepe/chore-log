@@ -195,7 +195,8 @@ class Chore {
         name: 'Zeiten',
         count: {
           default: 1,
-          index_type: 'array'
+          index_type: 'array',
+          'button:add_element': 'Hinzufügen'
         }
       }
     }

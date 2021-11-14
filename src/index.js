@@ -14,6 +14,7 @@ Twig.extendFilter('date_diff', (value, other) => {
 })
 
 global.lang_str = {}
+global.ui_lang = 'de'
 
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
 Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
