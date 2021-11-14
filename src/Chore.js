@@ -245,6 +245,7 @@ class Chore {
 
       this.save(update, () => {
         this.show()
+        this.list.updateTags()
         document.body.removeChild(editForm)
       })
 

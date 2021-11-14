@@ -26,6 +26,7 @@ global.fetch('chores')
   .then(data => {
     chores = new Chores()
     chores.load(data)
+    chores.updateTags()
   })
 
 window.onload = () => {

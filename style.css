@@ -19,6 +19,24 @@ ul#chores > li {
   flex-direction: row;
   justify-content: space-between;
 }
+ul#chores > li.hide {
+  display: none;
+}
+
+#tags > ul {
+  padding: 0 0.5em;
+}
+#tags > ul > li {
+  border: 1px solid black;
+  border-radius: 1em;
+  display: inline-block;
+  padding: 0.25em 0.25em;
+  margin-right: 0.5em;
+}
+#tags > ul > li.active {
+  background: grey;
+}
+
 .content > .title {
   font-weight: bold;
 }

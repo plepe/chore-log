@@ -3,6 +3,7 @@ const Chore = require('./Chore')
 module.exports = class Chores {
   constructor () {
     this.chores = []
+    this.filter = []
   }
 
   load (data) {
@@ -35,5 +36,45 @@ module.exports = class Chores {
     tags.sort((a, b) => result[b] - result[a])
 
     return tags
+  }
+
+  applyFilter () {
+    this.chores.forEach(item => item.li.classList.remove('hide'))
+
+    if (!this.filter.length) {
+      return
+    }
+
+    this.chores.forEach(item => {
+      if (!item.data.tags || this.filter.filter(tag => !item.data.tags.includes(tag)).length) {
+        item.li.classList.add('hide')
+      }
+    })
+  }
+
+  updateTags () {
+    const div = document.getElementById('tags')
+    div.innerHTML = ''
+
+    const ul = document.createElement('ul')
+    this.allTags().forEach(tag => {
+      const li = document.createElement('li')
+      li.appendChild(document.createTextNode(tag))
+      ul.appendChild(li)
+
+      li.onclick = () => {
+        if (this.filter.includes(tag)) {
+          li.classList.remove('active')
+          this.filter.splice(this.filter.indexOf(tag), 1)
+        } else {
+          li.classList.add('active')
+          this.filter.push(tag)
+        }
+
+        this.applyFilter()
+      }
+    })
+
+    div.appendChild(ul)
   }
 }
