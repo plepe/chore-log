@@ -36,6 +36,10 @@ ul#chores > li.hide {
 #tags > ul > li.active {
   background: grey;
 }
+#tags > ul > li.excluded {
+  border: 1px dashed grey;
+  color: grey;
+}
 
 .content > .title {
   font-weight: bold;
