@@ -43,12 +43,6 @@ class Chore {
       action.title = 'Edit'
       this.actionsDiv.appendChild(action)
       action.onclick = () => this.edit()
-
-      action = document.createElement('button')
-      action.innerHTML = '<i class="fas fa-trash"></i>'
-      action.title = 'Remove'
-      this.actionsDiv.appendChild(action)
-      action.onclick = () => this.remove()
     }
 
     if (this.data.color) {
@@ -233,6 +227,12 @@ class Chore {
     submit.title = 'Save'
     submit.innerHTML = '<i class="fas fa-save"></i> Ok'
     editForm.appendChild(submit)
+
+    const buttonDelete = document.createElement('button')
+    buttonDelete.innerHTML = '<i class="fas fa-trash"></i> Löschen'
+    buttonDelete.title = 'Remove'
+    editForm.appendChild(buttonDelete)
+    buttonDelete.onclick = () => this.remove()
 
     const cancel = document.createElement('button')
     cancel.title = 'Cancel'
