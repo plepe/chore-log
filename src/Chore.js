@@ -75,7 +75,15 @@ class Chore {
     }
   }
 
+  reload (callback) {
+    this.list.reload(callback)
+  }
+
   done () {
+    this.reload(() => this.done1())
+  }
+
+  done1 () {
     if (!this.data.dates) {
       this.data.dates = []
     }
@@ -214,6 +222,10 @@ class Chore {
   }
 
   edit () {
+    this.reload(() => this.edit1())
+  }
+
+  edit1 () {
     if (editForm && editForm.parentNode === document.body) {
       document.body.removeChild(editForm)
     }

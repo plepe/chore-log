@@ -32,7 +32,7 @@ module.exports = class Chores {
     this.chores.forEach(item => item.update())
   }
 
-  reload () {
+  reload (callback) {
     global.fetch('chores')
       .then(req => req.json())
       .then(data => {
@@ -50,6 +50,10 @@ module.exports = class Chores {
         })
 
         this.updateTags()
+
+        if (callback) {
+          callback(null)
+        }
       })
   }
 
