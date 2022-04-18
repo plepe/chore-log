@@ -15,6 +15,13 @@ module.exports = class Chores {
     })
   }
 
+  get (id) {
+    const list = this.chores.filter(chore => chore.id === id)
+    if (list.length) {
+      return list[0]
+    }
+  }
+
   addNew () {
     const item = new Chore({}, this)
     this.chores.push(item)
@@ -23,6 +30,27 @@ module.exports = class Chores {
 
   update () {
     this.chores.forEach(item => item.update())
+  }
+
+  reload () {
+    global.fetch('chores')
+      .then(req => req.json())
+      .then(data => {
+        data.forEach(item => {
+          let chore = this.get(item.id)
+
+          if (chore) {
+            chore.set(item)
+          } else {
+            chore = new Chore(item, this)
+            this.chores.push(chore)
+          }
+
+          chore.show()
+        })
+
+        this.updateTags()
+      })
   }
 
   allTags () {

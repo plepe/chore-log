@@ -19,22 +19,21 @@ global.ui_lang = 'de'
 Twig.extendFilter('momentFormat', (date, format) => moment(date).format(format[0]))
 Twig.extendFilter('momentFromNow', (date, param) => moment(date).fromNow(param))
 
-let chores
-
-global.fetch('chores')
-  .then(req => req.json())
-  .then(data => {
-    chores = new Chores()
-    chores.load(data)
-    chores.updateTags()
-  })
+const chores = new Chores()
+chores.reload()
 
 window.onload = () => {
-  const button = document.createElement('button')
+  let button = document.createElement('button')
   button.innerHTML = '<i class="fas fa-plus"></i>'
   button.title = 'Add'
   document.body.appendChild(button)
   button.onclick = () => chores.addNew()
+
+  button = document.createElement('button')
+  button.innerHTML = '<i class="fas fa-redo"></i>'
+  button.title = 'Reload'
+  document.body.appendChild(button)
+  button.onclick = () => chores.reload()
 
   window.setInterval(() => chores.update(), 60000)
 }

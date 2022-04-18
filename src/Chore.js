@@ -12,6 +12,10 @@ class Chore {
     this.data = entry
   }
 
+  set (entry) {
+    this.data = entry
+  }
+
   lastDate () {
     return this.data.dates ? this.data.dates[this.data.dates.length - 1] : null
   }
