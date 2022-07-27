@@ -101,6 +101,12 @@ module.exports = class Chores {
       li.appendChild(document.createTextNode(tag))
       ul.appendChild(li)
 
+      if (this.filter.includes(tag)) {
+        li.classList.add('active')
+      } else if (this.excluded.includes(tag)) {
+        li.classList.add('excluded')
+      }
+
       li.onclick = () => {
         if (this.filter.includes(tag)) {
           li.classList.remove('active')
