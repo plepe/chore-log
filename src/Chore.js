@@ -104,6 +104,7 @@ class Chore {
     })
 
     mf.show(editForm)
+    mf.focus()
 
     const submit = document.createElement('button')
     submit.type = 'submit'
