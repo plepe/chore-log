@@ -33,6 +33,9 @@ ul#chores > li.hide {
   padding: 0.25em 0.25em;
   margin-right: 0.5em;
   margin-bottom: 0.25em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 #tags > ul > li.active {
   background: grey;
@@ -58,11 +61,13 @@ ul#chores > li.hide {
 .actions > button {
   border: none;
   background: none;
+  cursor: pointer;
 }
 body > button {
   border: none;
   background: none;
   padding: 0.5em;
+  cursor: pointer;
 }
 
 @media (min-width: 50em) {
