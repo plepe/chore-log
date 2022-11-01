@@ -49,6 +49,12 @@ class Chore {
       action.onclick = () => this.edit()
     }
 
+    if (this.data.frequencyDays && (this.lastDate() === null || new Date().getTime() - new Date(this.lastDate()).getTime() > this.data.frequencyDays * 86400000)) {
+      this.li.classList.add('due')
+    } else {
+      this.li.classList.remove('due')
+    }
+
     if (this.data.color) {
       this.li.style = '--color: ' + parseInt(this.data.color.substr(1, 2), 16) + ',' + parseInt(this.data.color.substr(3, 2), 16) + ',' + parseInt(this.data.color.substr(5, 2), 16)
     } else {
@@ -204,6 +210,11 @@ class Chore {
           'button:add_element': 'Hinzufügen'
         },
         values: this.list.allTags()
+      },
+      frequencyDays: {
+        type: 'integer',
+        name: 'Gewünschte Frequenz',
+        desc: 'in Tagen'
       }
     }
 

@@ -19,6 +19,9 @@ ul#chores > li {
   flex-direction: row;
   justify-content: space-between;
 }
+ul#chores > li.due {
+  color: red;
+}
 ul#chores > li.hide {
   display: none;
 }
