@@ -36,4 +36,9 @@ window.onload = () => {
   button.onclick = () => chores.reload()
 
   window.setInterval(() => chores.update(), 60000)
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      chores.reload()
+    }
+  })
 }
