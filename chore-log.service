@@ -1,0 +1,10 @@
+[Unit]
+Description=Simple WSGI Server
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/code/chore-log
+ExecStart=npm start
+
+[Install]
+WantedBy=multi-user.target
