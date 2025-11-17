@@ -49,7 +49,7 @@ class Chore {
       action.onclick = () => this.edit()
     }
 
-    if (this.data.frequencyDays && this.isDue()) {
+    if (this.isDue()) {
       this.li.classList.add('due')
     } else {
       this.li.classList.remove('due')
@@ -90,6 +90,10 @@ class Chore {
   }
 
   isDue () {
+    if (!this.data.frequencyDays) {
+      return false
+    }
+
     return this.lastDate() === null || new Date().getTime() - new Date(this.lastDate()).getTime() > this.data.frequencyDays * 86400000
   }
 
