@@ -96,35 +96,37 @@ module.exports = class Chores {
     div.innerHTML = ''
 
     const ul = document.createElement('ul')
-    this.allTags().forEach(tag => {
-      const li = document.createElement('li')
-      li.appendChild(document.createTextNode(tag))
-      ul.appendChild(li)
-
-      if (this.filter.includes(tag)) {
-        li.classList.add('active')
-      } else if (this.excluded.includes(tag)) {
-        li.classList.add('excluded')
-      }
-
-      li.onclick = () => {
-        if (this.filter.includes(tag)) {
-          li.classList.remove('active')
-          li.classList.add('excluded')
-          this.filter.splice(this.filter.indexOf(tag), 1)
-          this.excluded.push(tag)
-        } else if (this.excluded.includes(tag)) {
-          li.classList.remove('excluded')
-          this.excluded.splice(this.excluded.indexOf(tag), 1)
-        } else {
-          li.classList.add('active')
-          this.filter.push(tag)
-        }
-
-        this.applyFilter()
-      }
-    })
+    this.allTags().forEach(tag => this.showFilter(ul, tag, tag))
 
     div.appendChild(ul)
+  }
+
+  showFilter (ul, tag, text) {
+    const li = document.createElement('li')
+    li.appendChild(document.createTextNode(text))
+    ul.appendChild(li)
+
+    if (this.filter.includes(tag)) {
+      li.classList.add('active')
+    } else if (this.excluded.includes(tag)) {
+      li.classList.add('excluded')
+    }
+
+    li.onclick = () => {
+      if (this.filter.includes(tag)) {
+        li.classList.remove('active')
+        li.classList.add('excluded')
+        this.filter.splice(this.filter.indexOf(tag), 1)
+        this.excluded.push(tag)
+      } else if (this.excluded.includes(tag)) {
+        li.classList.remove('excluded')
+        this.excluded.splice(this.excluded.indexOf(tag), 1)
+      } else {
+        li.classList.add('active')
+        this.filter.push(tag)
+      }
+
+      this.applyFilter()
+    }
   }
 }
