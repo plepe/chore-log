@@ -82,6 +82,10 @@ class Chore {
   }
 
   hasTag (tag) {
+    if (tag === '_due') {
+      return this.isDue()
+    }
+
     return this.data.tags.includes(tag)
   }
 

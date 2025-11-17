@@ -48,6 +48,15 @@ ul#chores > li.hide {
   color: grey;
 }
 
+#tags > ul > li.due {
+  color: red;
+  border-color: red;
+}
+#tags > ul > li.due.excluded {
+  color: #ff3f3f;
+  border-color: #ff3f3f;
+}
+
 .content > .title {
   font-weight: bold;
 }

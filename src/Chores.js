@@ -98,6 +98,9 @@ module.exports = class Chores {
     const ul = document.createElement('ul')
     this.allTags().forEach(tag => this.showFilter(ul, tag, tag))
 
+    const liDue= this.showFilter(ul, '_due', 'fällig')
+    liDue.classList.add('due')
+
     div.appendChild(ul)
   }
 
@@ -128,5 +131,7 @@ module.exports = class Chores {
 
       this.applyFilter()
     }
+
+    return li
   }
 }
