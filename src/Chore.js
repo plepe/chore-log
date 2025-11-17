@@ -81,6 +81,10 @@ class Chore {
     }
   }
 
+  hasTag (tag) {
+    return this.data.tags.includes(tag)
+  }
+
   reload (callback) {
     this.list.reload(callback)
   }

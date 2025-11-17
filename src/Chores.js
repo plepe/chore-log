@@ -75,7 +75,7 @@ module.exports = class Chores {
     this.chores.forEach(item => item.li.classList.remove('hide'))
 
     this.chores.forEach(item => {
-      if (item.data.tags && this.excluded.filter(tag => item.data.tags.includes(tag)).length) {
+      if (item.data.tags && this.excluded.filter(tag => item.hasTag(tag)).length) {
         item.li.classList.add('hide')
       }
     })
@@ -85,7 +85,7 @@ module.exports = class Chores {
     }
 
     this.chores.forEach(item => {
-      if (!item.data.tags || this.filter.filter(tag => !item.data.tags.includes(tag)).length) {
+      if (!item.data.tags || this.filter.filter(tag => !item.hasTag(tag)).length) {
         item.li.classList.add('hide')
       }
     })
