@@ -49,7 +49,7 @@ class Chore {
       action.onclick = () => this.edit()
     }
 
-    if (this.data.frequencyDays && (this.lastDate() === null || new Date().getTime() - new Date(this.lastDate()).getTime() > this.data.frequencyDays * 86400000)) {
+    if (this.data.frequencyDays && this.isDue()) {
       this.li.classList.add('due')
     } else {
       this.li.classList.remove('due')
@@ -83,6 +83,10 @@ class Chore {
 
   hasTag (tag) {
     return this.data.tags.includes(tag)
+  }
+
+  isDue () {
+    return this.lastDate() === null || new Date().getTime() - new Date(this.lastDate()).getTime() > this.data.frequencyDays * 86400000
   }
 
   reload (callback) {
